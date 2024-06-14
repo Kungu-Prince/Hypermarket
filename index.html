@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypermarket Selling Price Calculator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <h1>Hypermarket Selling Price Calculator</h1>
+    <form action="calculations.php" method="post" id="productForm">
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Buying Price (Ksh)</th>
+                    <th>VAT (%)</th>
+                    <th>General Expenses (%)</th>
+                    <th>Profit Margin (%)</th>
+                </tr>
+            </thead>
+            <tbody id="productBody">
+                <!-- Product rows will be added dynamically here -->
+            </tbody>
+        </table>
+        <button type="button" onclick="addProducts()">Add Products</button>
+        <button type="submit">Calculate Selling Prices</button>
+    </form>
+
+    <script>
+        function addProducts() {
+            var productBody = document.getElementById('productBody');
+            var html = '';
+
+            for (var i = 1; i <= 10; i++) {
+                html += `
+                    <tr>
+                        <td>Product ${i}</td>
+                        <td>
+                            <label for="buying_price_${i}">Buying Price:</label>
+                            <input type="number" id="buying_price_${i}" name="buying_price[]" step="0.01" required>
+                        </td>
+                        <td>
+                            <label for="vat_${i}">VAT:</label>
+                            <input type="number" id="vat_${i}" name="vat[]" step="0.01" required>
+                        </td>
+                        <td>
+                            <label for="expenses_${i}">General Expenses:</label>
+                            <input type="number" id="expenses_${i}" name="expenses[]" step="0.01" required>
+                        </td>
+                        <td>
+                            <label for="profit_margin_${i}">Profit Margin:</label>
+                            <input type="number" id="profit_margin_${i}" name="profit_margin[]" step="0.01" required>
+                        </td>
+                    </tr>
+                `;
+            }
+
+            productBody.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>
